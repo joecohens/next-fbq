@@ -1,0 +1,31 @@
+{
+  "name": "next-fbq",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/joecohens/next-fbq.git",
+  "license": "MIT",
+  "keywords": [
+    "nextjs",
+    "react",
+    "fbq",
+    "facebook pixel",
+    "hoc",
+    "high order component"
+  ],
+  "scripts": {
+    "build": "babel src -d dist",
+    "prepublish": "npm run build"
+  },
+  "dependencies": {
+    "react-facebook-pixel": "^0.1.1"
+  },
+  "peerDependencies": {
+    "next": "^6.0.0",
+    "react": "^16.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-minify": "^0.4.3"
+  }
+}
