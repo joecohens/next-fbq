@@ -13,6 +13,7 @@ yarn add next-fbq
 Import it inside your `pages/_app.js`;
 
 ```js
+import Router from "next/router";
 import withFBQ from "next-fbq";
 ```
 
@@ -20,7 +21,7 @@ Wrap your [custom App container](https://nextjs.org/docs#custom-%3Capp%3E) with 
 
 ```js
 // pass your Facebook Pixel code as first argument
-export default withFBQ("139xxxxxxxxx3")(MyApp);
+export default withFBQ("139xxxxxxxxx3", Router)(MyApp);
 ```
 
 That's it, now when the user access a page it will log a pageview to Facebook Pixel, each page change after that will also trigger a pageview on FB Pixel. The second argument is used to tell next-fbq you are wrapping your `_app` instead of each page individually (defaults to `true`), in that case it will run on `componentDidUpdate` too.
