@@ -6,20 +6,25 @@ function isLocal() {
   return location.hostname === "localhost";
 }
 
-export default (code, { isApp = true } = {}) => Page => {
+function isDev() {
+  return process.env.NODE_ENV !== "production";
+}
+
+export default (code, { router } = {}) => Page => {
   class WithFacebookPixel extends Component {
     componentDidMount() {
-      this.isLocal = isLocal();
-      if (this.isLocal) return;
+      const shouldntTrack = isLocal() || isDev();
+
+      if (shouldntTrack) return;
+
       analytics.init(code);
       analytics.pageview();
-    }
 
-    componentDidUpdate() {
-      if (isApp) {
-        if (this.isLocal) return;
-        analytics.init(code);
-        analytics.pageview();
+      // listen route changes
+      if (router && router.events && typeof router.events.on === "function") {
+        router.events.on("routeChangeComplete", () => {
+          analytics.pageview();
+        });
       }
     }
 
