@@ -13,9 +13,9 @@ function isDev() {
 export default (code, { router } = {}) => Page => {
   class WithFacebookPixel extends Component {
     componentDidMount() {
-      const shouldTrack = isLocal() || isDev();
-      
-      if (!shouldTrack) return;
+      const shouldntTrack = isLocal() || isDev();
+
+      if (shouldntTrack) return;
 
       analytics.init(code);
       analytics.pageview();
